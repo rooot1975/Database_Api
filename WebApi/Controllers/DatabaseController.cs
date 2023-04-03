@@ -99,13 +99,14 @@ namespace WebApi.Controllers
             }
 
             object[] args = new object[] { sp_Model.Database, sp_Model.StoreProcedure_Name, Parameters_str };
-            string Query = String.Format("EXEC {0}.[dbo].{1} {2} ", args);
+            string Query = String.Format("DECLARE @return_value int EXEC {0}.[dbo].{1} {2} ; SELECT 'Return Value' = @return_value", args);
+            //string Query = String.Format("EXEC {0}.[dbo].{1} {2} ", args);
 
 
 
             try
             {
-                result = await Task.FromResult(_dapper.GetAll<object>(sp_Model.ConnectionStr, Query, new DynamicParameters { }, CommandType.Text));
+                result = await Task.FromResult(_dapper.GetAll<object>(sp_Model.Database, Query, new DynamicParameters { }, CommandType.Text));
                 // result.Add(Query);
             }
             catch (Exception e)

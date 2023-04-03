@@ -4,8 +4,7 @@ namespace WebApi.Models
 {
     public class StoreProcedure_Model
     {
-        [Required]
-        public string ConnectionStr { get; set; } = "";
+       
         [Required]
         public string Database { get; set; } = "";
         [Required]
